@@ -1,4 +1,7 @@
-import loki from 'loki'
+import {createElement, default as loki} from 'loki'
 
-const a = new loki.Component();
-console.log(loki)
+class b extends loki.Component {
+
+}
+const a = new b;
+console.log(a.render())
