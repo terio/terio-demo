@@ -1,7 +1,8 @@
-import {createElement, default as loki} from 'loki'
+import {createVirtualNode, default as loki} from 'loki'
+import lokiDOM from 'loki/src/dom'
 
-class b extends loki.Component {
+class B extends loki.Component {}
+// const a = new b;
+console.log(<B src="abcd"/>)
 
-}
-const a = new b;
-console.log(a.render())
+lokiDOM.mount(<B src="abcd"/>, document.getElementById('app'));
