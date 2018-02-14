@@ -1,8 +1,14 @@
 import {createVirtualNode, default as loki} from 'loki';
 import styles from './index.scss';
-console.log(styles);
+
 export default class Header extends loki.Component {
+    handleClick() {
+        console.log('uyo');
+    }
     render() {
-        return <div className={styles.header}>Header</div>;
+        return <div class={styles.header} onclick={this.handleClick.bind(this)} style={{
+            'font-weight': 'bold',
+            'font-style': 'italic'
+        }}>Headers</div>;
     }
 }
