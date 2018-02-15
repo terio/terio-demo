@@ -6,9 +6,9 @@ export default class Header extends loki.Component {
         console.log('uyo');
     }
     render() {
-        return <div class={styles.header} onclick={this.handleClick.bind(this)} style={{
+        return <header class={styles.header} onclick={this.handleClick.bind(this)} style={{
             'font-weight': 'bold',
             'font-style': 'italic'
-        }}>Headers</div>;
+        }}>Headers</header>;
     }
 }
