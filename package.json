@@ -24,14 +24,14 @@
     "node-sass": "^4.7.2",
     "nodemon": "^1.14.12",
     "sass-loader": "^6.0.6",
-    "style-loader": "^0.20.1",
-    "webpack": "^3.10.0",
-    "webpack-dev-server": "^2.11.1"
-  },
-  "dependencies": {
-    "loki": "file:../loki",
     "source-map-support": "^0.5.3",
     "start-server-webpack-plugin": "^2.2.1",
+    "style-loader": "^0.20.1",
+    "webpack": "^3.10.0",
+    "webpack-dev-server": "^2.11.1",
     "webpack-node-externals": "^1.6.0"
+  },
+  "dependencies": {
+    "loki": "file:../loki"
   }
 }
