@@ -29,14 +29,12 @@ if(!IS_PROD) {
     })
     .listen(8080);
 }
-console.log(resolve('public/manifest.json'));
 server.get('/*', function(req, res) {
     manifest = manifest || fs.readFileSync(resolve('public/manifest.json'), 'utf-8');
     appTemplate = appTemplate || template(fs.readFileSync(resolve('public/app.html'), 'utf-8'), TEMPLATE_SETTINGS);
     let renderedAppString = '';
     if(USE_SSR) {
         renderedAppString = renderToString(<App/>);
-        console.log(renderedAppString);
     }
     return res.send(appTemplate({manifest, renderedAppString}));
 });
