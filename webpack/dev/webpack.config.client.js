@@ -1,11 +1,12 @@
 const resolve = require('path').resolve;
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ManifestPlugin = require('webpack-manifest-plugin');
 
 module.exports = {
     devtool: 'eval-source-map',
     entry: [
-        resolve('src/client', 'index.js')
+        resolve('client', 'index.js')
     ],
     output: {
         filename: 'main.js',
@@ -40,8 +41,11 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
             title: 'Loki demo',
-            filename: resolve('public', 'index.html'),
-            template: resolve('src', 'index.html')
+            filename: resolve('public', 'app.html'),
+            template: resolve('client', 'index.html')
+        }),
+        new ManifestPlugin({
+            writeToFileEmit: true
         })
     ],
     devServer: {

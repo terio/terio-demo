@@ -5,8 +5,17 @@ const StartServerPlugin = require('start-server-webpack-plugin');
 module.exports = {
     devtool: 'inline-source-map',
     target: 'node',
+    node: {
+        console: false,
+        global: false,
+        process: false,
+        __filename: false,
+        __dirname: false,
+        Buffer: false,
+        setImmediate: false
+    },
     entry: [
-        resolve('src/server', 'index.js')
+        resolve('server', 'index.js')
     ],
     output: {
         filename: 'main.js',
@@ -19,8 +28,36 @@ module.exports = {
             {
                 test: /\.js$/,
                 use: {
-                    loader: 'babel-loader'
-                }
+                    loader: 'babel-loader',
+                    options: {
+                        presets: [
+                            ['@babel/preset-env', {
+                                targets: {
+                                    node: 'current'
+                                }
+                            }]
+                        ]
+                    }
+                },
+                exclude: /client/
+            },
+            {
+                test: /\.js$/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: [
+                            ['@babel/preset-env', {
+                                targets: {
+                                    node: 'current'
+                                }
+                            }]
+                        ],
+                        plugins: ['@babel/plugin-transform-async-to-generator']
+                    }
+                },
+                include: /client/,
+                exclude: /server/
             },
             {
                 test: /\.scss$/,
