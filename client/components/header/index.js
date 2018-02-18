@@ -3,7 +3,7 @@ import styles from './index.scss';
 
 export default class Header extends loki.Component {
     handleClick() {
-        console.log('uyo');
+        // console.log('uyo');
     }
     render() {
         return <header class={styles.header} onclick={this.handleClick.bind(this)} style={{

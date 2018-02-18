@@ -3,7 +3,7 @@ import loki from 'loki';
 import App from '../client/components/app';
 import {IS_PROD, USE_SSR} from '../shared/constants/app';
 import webpack from 'webpack';
-import express from 'express';
+// import express from 'express';
 import {resolve} from 'path';
 import WebpackDevServer from 'webpack-dev-server';
 import {template} from 'lodash';
@@ -27,7 +27,7 @@ if(!IS_PROD) {
             fs = compiler.outputFileSystem;
         }
     })
-    .listen(8080);
+        .listen(8080);
 }
 server.get('/*', function(req, res) {
     manifest = manifest || fs.readFileSync(resolve('public/manifest.json'), 'utf-8');
