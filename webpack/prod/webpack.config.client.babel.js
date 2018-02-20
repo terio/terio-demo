@@ -4,7 +4,7 @@ import {resolve} from 'path';
 import {StatsWriterPlugin} from 'webpack-stats-plugin';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 
-module.exports = {
+export default {
     devtool: 'source-map',
     entry: {
         main: paths.CLIENT_ENTRY,

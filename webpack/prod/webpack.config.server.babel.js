@@ -2,7 +2,7 @@ import webpack from 'webpack';
 import paths from '../paths.babel';
 import {resolve} from 'path';
 
-module.exports = {
+export default {
     devtool: 'inline-source-map',
     target: 'node',
     node: {
