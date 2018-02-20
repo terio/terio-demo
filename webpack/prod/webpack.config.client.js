@@ -1,13 +1,12 @@
 const resolve = require('path').resolve;
 const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ManifestPlugin = require('webpack-manifest-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const StatsWriterPlugin = require("webpack-stats-plugin").StatsWriterPlugin;
 
 module.exports = {
     devtool: 'source-map',
     entry: {
-        app: resolve('client', 'index.js'),
+        main: resolve('client', 'index.js'),
         vendor: ['loki']
     },
     output: {
@@ -33,11 +32,6 @@ module.exports = {
         ]
     },
     plugins: [
-        new HtmlWebpackPlugin({
-            title: 'Loki demo',
-            filename: resolve('public', 'index.html'),
-            template: resolve('client', 'index.html')
-        }),
         new webpack.optimize.CommonsChunkPlugin({
             name: 'vendor',
             minChunks: function (module) {
@@ -49,8 +43,8 @@ module.exports = {
                 return module.context && module.context.includes('node_modules');
             }
         }),
-        new ManifestPlugin(),
-        new ExtractTextPlugin('app.[hash].css')
+        new StatsWriterPlugin(),
+        new ExtractTextPlugin('main.[hash].css')
     ],
     devServer: {
         contentBase: resolve('public'),

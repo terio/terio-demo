@@ -3,38 +3,56 @@ import loki from 'loki';
 import App from '../client/components/app';
 import {IS_PROD, USE_SSR} from '../shared/constants/app';
 import webpack from 'webpack';
-// import express from 'express';
 import {resolve} from 'path';
-import WebpackDevServer from 'webpack-dev-server';
-import {template} from 'lodash';
+import appTemplate from './templates/app';
+import Koa from 'koa';
+import middleware from 'koa-webpack';
+import devWebpackConfig from '../webpack/dev/webpack.config.client.js';
 
-const TEMPLATE_SETTINGS = {
-    evaluate:    /{{([\s\S]+?)}}/g,
-    interpolate: /{{=([\s\S]+?)}}/g,
-    escape:      /{{-([\s\S]+?)}}/g
-};
+const app = new Koa;
 
-let server, fs = require('fs'), manifest, appTemplate;
+const EXTENSION_REGEX = /\.([a-z]+)$/;
 
-if(!IS_PROD) {
-    const devWebpackConfig = require('../webpack/dev/webpack.config.client.js');
-    const compiler = webpack(devWebpackConfig);
-    new WebpackDevServer(compiler, {
-        contentBase: resolve('public'),
-        hot: true,
-        before(app) {
-            server = app;
-            fs = compiler.outputFileSystem;
-        }
-    })
-        .listen(8080);
+function statsToAssets(stats) {
+    return Object.entries(stats.assetsByChunkName)
+        .reduce((assets, [key, value]) => {
+            value = Array.isArray(value) ? value : [value];
+            assets[key] = assets[key] || {};
+            for(const fileName of value) {
+                const extension = EXTENSION_REGEX.exec(fileName);
+                if(extension) {
+                    assets[key][extension[1]] = assets[key][extension[1]] || [];
+                    assets[key][extension[1]].push(fileName);
+                }
+            }
+            return assets;
+        }, {});
 }
-server.get('/*', function(req, res) {
-    manifest = manifest || fs.readFileSync(resolve('public/manifest.json'), 'utf-8');
-    appTemplate = appTemplate || template(fs.readFileSync(resolve('public/app.html'), 'utf-8'), TEMPLATE_SETTINGS);
-    let renderedAppString = '';
-    if(USE_SSR) {
-        renderedAppString = renderToString(<App/>);
-    }
-    return res.send(appTemplate({manifest, renderedAppString}));
+if(IS_PROD) {
+    const stats = require('../public/stats.json');
+    const assets = statsToAssets(stats);
+    app.use(async (ctx, next) => {
+        ctx.state.assets = assets;
+        console.log(ctx.state.assets)
+        next();
+    });
+} else {
+    const compiler = webpack(devWebpackConfig);
+    app.use(middleware({
+        compiler: compiler,
+        dev: devWebpackConfig.devServer
+    }));
+    app.use(async (ctx, next) => {
+        ctx.state.assets = statsToAssets(ctx.state.webpackStats.toJson());
+        console.log(ctx.state.assets)
+        next();
+    });
+}
+app.use(async ctx => {
+    console.log('in')
+    ctx.body = appTemplate({
+        renderedAppString: renderToString(<App/>),
+        assets: ctx.state.assets
+    });
 });
+app.listen(8080);
