@@ -26,7 +26,7 @@ export default {
             {
                 test: /\.scss$/,
                 use: ExtractTextPlugin.extract({
-                    fallback: 'isomorphic-style-loader',
+                    fallback: 'style-loader',
                     use: [{
                         loader: 'css-loader',
                         options: {
