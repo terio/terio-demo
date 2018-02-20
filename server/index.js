@@ -1,13 +1,12 @@
 import {renderToString} from 'loki/lib/dom/server';
 import loki from 'loki';
 import App from '../client/components/app';
-import {IS_PROD, USE_SSR} from '../shared/constants/app';
-import webpack from 'webpack';
-import {resolve} from 'path';
 import appTemplate from './templates/app';
 import Koa from 'koa';
-import middleware from 'koa-webpack';
-import devWebpackConfig from '../webpack/dev/webpack.config.client.js';
+import KoaStaticMiddleware from 'koa-static';
+import paths from '../webpack/paths.babel';
+import {resolve} from 'path';
+import fs from 'fs';
 
 const app = new Koa;
 
@@ -28,31 +27,14 @@ function statsToAssets(stats) {
             return assets;
         }, {});
 }
-if(IS_PROD) {
-    const stats = require('../public/stats.json');
-    const assets = statsToAssets(stats);
-    app.use(async (ctx, next) => {
-        ctx.state.assets = assets;
-        console.log(ctx.state.assets)
-        next();
-    });
-} else {
-    const compiler = webpack(devWebpackConfig);
-    app.use(middleware({
-        compiler: compiler,
-        dev: devWebpackConfig.devServer
-    }));
-    app.use(async (ctx, next) => {
-        ctx.state.assets = statsToAssets(ctx.state.webpackStats.toJson());
-        console.log(ctx.state.assets)
-        next();
-    });
-}
+const stats = __non_webpack_require__(resolve(paths.CLIENT_BUILD, 'stats.json'));
+const assets = statsToAssets(stats);
+app.use(KoaStaticMiddleware(paths.CLIENT_BUILD));
 app.use(async ctx => {
-    console.log('in')
     ctx.body = appTemplate({
         renderedAppString: renderToString(<App/>),
-        assets: ctx.state.assets
+        assets
     });
 });
+
 app.listen(8080);

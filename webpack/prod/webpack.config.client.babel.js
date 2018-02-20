@@ -1,17 +1,18 @@
-const resolve = require('path').resolve;
-const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const StatsWriterPlugin = require("webpack-stats-plugin").StatsWriterPlugin;
+import webpack from 'webpack';
+import paths from '../paths.babel';
+import {resolve} from 'path';
+import {StatsWriterPlugin} from 'webpack-stats-plugin';
+import ExtractTextPlugin from 'extract-text-webpack-plugin';
 
 module.exports = {
     devtool: 'source-map',
     entry: {
-        main: resolve('client', 'index.js'),
+        main: paths.CLIENT_ENTRY,
         vendor: ['loki']
     },
     output: {
         filename: '[name].[chunkhash].js',
-        path: resolve('public'),
+        path: paths.CLIENT_BUILD,
         publicPath: '/'
     },
     module: {
@@ -25,8 +26,15 @@ module.exports = {
             {
                 test: /\.scss$/,
                 use: ExtractTextPlugin.extract({
-                    fallback: 'style-loader',
-                    use: ['css-loader', 'sass-loader']
+                    fallback: 'isomorphic-style-loader',
+                    use: [{
+                        loader: 'css-loader',
+                        options: {
+                            modules: true,
+                            importLoaders: 1,
+                            localIdentName: '[folder]___[local]___[hash:base64:5]'
+                        }
+                    }, 'sass-loader']
                 })
             }
         ]
@@ -45,11 +53,5 @@ module.exports = {
         }),
         new StatsWriterPlugin(),
         new ExtractTextPlugin('main.[hash].css')
-    ],
-    devServer: {
-        contentBase: resolve('public'),
-        historyApiFallback: true,
-        inline: true,
-        publicPath: '/'
-    }
+    ]
 }

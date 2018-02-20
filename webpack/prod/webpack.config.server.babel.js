@@ -1,6 +1,6 @@
-const resolve = require('path').resolve;
-const webpack = require('webpack');
-const StartServerPlugin = require('start-server-webpack-plugin');
+import webpack from 'webpack';
+import paths from '../paths.babel';
+import {resolve} from 'path';
 
 module.exports = {
     devtool: 'inline-source-map',
@@ -15,11 +15,11 @@ module.exports = {
         setImmediate: false
     },
     entry: [
-        resolve('server', 'index.js')
+        paths.SERVER_ENTRY
     ],
     output: {
         filename: 'main.js',
-        path: resolve('server-build'),
+        path: paths.SERVER_BUILD,
         devtoolModuleFilenameTemplate: '[absolute-resource-path]'
     },
     externals: [require('webpack-node-externals')()],
@@ -81,12 +81,8 @@ module.exports = {
             raw: true,
             banner: 'require("source-map-support/register");'
         }),
-        new StartServerPlugin({
-            name: 'main.js',
-            nodeArgs: ['--inspect']
-        }),
         new webpack.DefinePlugin({
-            // 'process.env.NODE_ENV': JSON.stringify('production')
+            'process.env.NODE_ENV': JSON.stringify('production')
         })
     ]
 }

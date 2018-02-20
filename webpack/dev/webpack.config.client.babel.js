@@ -1,14 +1,16 @@
-const resolve = require('path').resolve;
-const webpack = require('webpack');
+import webpack from 'webpack';
+import paths from '../paths.babel';
+import {resolve} from 'path';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
 
-module.exports = {
+export default {
     devtool: 'eval-source-map',
     entry: [
-        resolve('client', 'index.js')
+        paths.CLIENT_ENTRY
     ],
     output: {
         filename: 'main.js',
-        path: resolve('public'),
+        path: paths.CLIENT_BUILD,
         publicPath: '/'
     },
     module: {
@@ -36,12 +38,15 @@ module.exports = {
             }
         ]
     },
-    plugins: [],
+    plugins: [
+        new HtmlWebpackPlugin({
+            template: resolve('server', 'templates/app.js')
+        })
+    ],
     devServer: {
-        contentBase: resolve('public'),
+        contentBase: paths.CLIENT_BUILD,
         historyApiFallback: true,
         inline: true,
-        publicPath: '/',
-        serverSideRender: true
+        publicPath: '/'
     }
 }

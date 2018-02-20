@@ -9,6 +9,6 @@ export default class Header extends loki.Component {
         return <header class={styles.header} onclick={this.handleClick.bind(this)} style={{
             'font-weight': 'bold',
             'font-style': 'italic'
-        }}>Headers</header>;
+        }}>Header</header>;
     }
 }
