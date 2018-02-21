@@ -5,7 +5,9 @@ export default class App extends loki.Component {
     render() {
         return (
             <div>
-                <Header/>
+                <Header>
+                    I am here
+                </Header>
             </div>
         );
     }
