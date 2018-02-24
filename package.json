@@ -6,7 +6,7 @@
   "author": "subramanyam963@gmail.com",
   "license": "MIT",
   "scripts": {
-    "watch:terio": "nodemon --watch ../terio --exec 'yarn upgrade terio'",
+    "watch:terio": "nodemon --watch ../terio --exec 'yarn upgrade terio --prefer-offline'",
     "start:dev:server": "webpack-dev-server --config webpack/dev/webpack.config.client.babel.js",
     "start:prod:server": "babel-node build/server/main",
     "build:prod:server": "webpack --config webpack/prod/webpack.config.server.babel.js",
