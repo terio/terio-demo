@@ -1,7 +1,7 @@
-import {createVirtualNode, default as loki} from 'loki';
+import {createVirtualNode, default as terio} from 'terio';
 import Header from '../header';
 
-export default class App extends loki.Component {
+export default class App extends terio.Component {
     constructor(...args) {
         super(...args);
         const counter = 0;

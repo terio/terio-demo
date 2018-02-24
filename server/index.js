@@ -1,5 +1,5 @@
-import {renderToString} from 'loki/lib/dom/server';
-import loki from 'loki';
+import {renderToString} from 'terio/lib/dom/server';
+import terio from 'terio';
 import App from '../client/components/app';
 import appTemplate from './templates/app';
 import Koa from 'koa';

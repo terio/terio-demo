@@ -1,5 +1,5 @@
-import {createVirtualNode, default as loki} from 'loki';
-import lokiDOM from 'loki/lib/dom';
+import {createVirtualNode, default as terio} from 'terio';
+import terioDOM from 'terio/lib/dom';
 import App from './components/app';
 
-lokiDOM.mount(<App/>, document.getElementById('app'));
+terioDOM.mount(<App/>, document.getElementById('app'));

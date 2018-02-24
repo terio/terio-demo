@@ -1,12 +1,12 @@
 {
-  "name": "loki-demo",
+  "name": "terio-demo",
   "version": "0.1.0",
   "main": "index.js",
-  "repository": "git@github.com:subbu963/loki-demo.git",
+  "repository": "git@github.com:subbu963/terio-demo.git",
   "author": "subramanyam963@gmail.com",
   "license": "MIT",
   "scripts": {
-    "watch:loki": "nodemon --watch ../loki --exec 'yarn upgrade loki'",
+    "watch:terio": "nodemon --watch ../terio --exec 'yarn upgrade terio'",
     "start:dev:server": "webpack-dev-server --config webpack/dev/webpack.config.client.babel.js",
     "start:prod:server": "babel-node build/server/main",
     "build:prod:server": "webpack --config webpack/prod/webpack.config.server.babel.js",
@@ -19,10 +19,10 @@
     "@babel/plugin-transform-async-to-generator": "7.0.0-beta.39",
     "@babel/preset-env": "^7.0.0-beta.39",
     "babel-loader": "8.0.0-beta.0",
-    "babel-preset-loki": "file:../babel-preset-loki",
+    "babel-preset-terio": "file:../babel-preset-terio",
     "css-loader": "^0.28.9",
     "eslint": "^4.18.0",
-    "eslint-config-loki": "file:../eslint-config-loki",
+    "eslint-config-terio": "file:../eslint-config-terio",
     "eslint-plugin-react": "^7.6.1",
     "extract-text-webpack-plugin": "^3.0.2",
     "html-webpack-plugin": "^2.30.1",
@@ -41,6 +41,6 @@
     "koa": "^2.5.0",
     "koa-static": "^4.0.2",
     "lodash": "^4.17.5",
-    "loki": "file:../loki"
+    "terio": "file:../terio"
   }
 }

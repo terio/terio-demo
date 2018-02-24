@@ -1,1 +1,1 @@
-# loki-demo
+# terio-demo

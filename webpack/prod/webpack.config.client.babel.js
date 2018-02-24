@@ -8,7 +8,7 @@ export default {
     devtool: 'source-map',
     entry: {
         main: paths.CLIENT_ENTRY,
-        vendor: ['loki']
+        vendor: ['terio']
     },
     output: {
         filename: '[name].[chunkhash].js',

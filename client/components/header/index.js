@@ -1,8 +1,8 @@
-import {createVirtualNode, default as loki} from 'loki';
+import {createVirtualNode, default as terio} from 'terio';
 import styles from './index.scss';
 
 const colors = ['red', 'blue'];
-export default class Header extends loki.Component {
+export default class Header extends terio.Component {
     constructor(...args) {
         super(...args);
         const counter = 0;
