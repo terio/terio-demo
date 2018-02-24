@@ -12,13 +12,16 @@ export default class Header extends loki.Component {
         };
     }
     mounted() {
-        setInterval(() => {
+        this.interval = setInterval(() => {
             const counter = this.state.counter + 1;
             this.setState({
                 counter,
                 color: colors[counter % colors.length]
             });
-        }, 1000);
+        }, 5);
+    }
+    willUnmount() {
+        clearInterval(this.interval);
     }
     handleClick(){}
     render() {
