@@ -3,6 +3,7 @@ import paths from '../paths.babel';
 import {resolve} from 'path';
 import {StatsWriterPlugin} from 'webpack-stats-plugin';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
+import UglifyJsPlugin from 'uglifyjs-webpack-plugin';
 
 export default {
     devtool: 'source-map',
@@ -52,6 +53,10 @@ export default {
             }
         }),
         new StatsWriterPlugin(),
-        new ExtractTextPlugin('main.[hash].css')
+        new ExtractTextPlugin('main.[hash].css'),
+        new UglifyJsPlugin({
+            parallel: true,
+            sourceMap: true
+        })
     ]
 }

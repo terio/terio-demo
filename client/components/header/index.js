@@ -18,7 +18,7 @@ export default class Header extends terio.Component {
                 counter,
                 color: colors[counter % colors.length]
             });
-        }, 5);
+        }, 1000);
     }
     willUnmount() {
         clearInterval(this.interval);

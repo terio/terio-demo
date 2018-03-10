@@ -7,7 +7,7 @@ export default class App extends terio.Component {
         const counter = 0;
         this.state = {
             counter,
-            showHeader: counter % 2
+            showSomething: counter % 2
         };
     }
     mounted() {
@@ -15,9 +15,9 @@ export default class App extends terio.Component {
             const counter = this.state.counter + 1;
             this.setState({
                 counter,
-                showHeader: counter % 2
+                showSomething: counter % 2
             });
-        }, 10);
+        }, 1000);
     }
     willUnmount() {
         clearInterval(this.interval);
@@ -25,9 +25,10 @@ export default class App extends terio.Component {
     render() {
         return (
             <div>
-                {this.state.showHeader ? (<Header>
+                {this.state.showSomething ? '' : <Header>
                     Header is shown
-                </Header>) : 'Header is hidden'}
+                </Header>}
+                {this.state.showSomething ? <span>something</span> : ''}
             </div>
         );
     }

@@ -6,6 +6,7 @@ import Koa from 'koa';
 import KoaStaticMiddleware from 'koa-static';
 import paths from '../webpack/paths.babel';
 import {resolve} from 'path';
+import compress from 'koa-compress';
 
 const app = new Koa;
 
@@ -30,7 +31,9 @@ function statsToAssets(stats) {
 const stats = __non_webpack_require__(resolve(paths.CLIENT_BUILD, 'stats.json'));
 const assets = statsToAssets(stats);
 
+app.use(compress());
 app.use(KoaStaticMiddleware(paths.CLIENT_BUILD));
+
 app.use(async ctx => {
     ctx.body = appTemplate({
         renderedAppString: renderToString(<App/>),

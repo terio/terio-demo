@@ -8,9 +8,9 @@
   "scripts": {
     "watch:terio": "nodemon --watch ../terio --exec 'yarn upgrade terio --prefer-offline'",
     "start:dev:server": "webpack-dev-server --config webpack/dev/webpack.config.client.babel.js",
-    "start:prod:server": "babel-node build/server/main",
-    "build:prod:server": "webpack --config webpack/prod/webpack.config.server.babel.js",
-    "build:prod:client": "webpack --config webpack/prod/webpack.config.client.babel.js"
+    "start:prod:server": "yarn build:prod:client && yarn build:prod:server && node --inspect build/server/main",
+    "build:prod:server": "rm -rf build/server && webpack --config webpack/prod/webpack.config.server.babel.js",
+    "build:prod:client": "rm -rf build/client && webpack --config webpack/prod/webpack.config.client.babel.js"
   },
   "devDependencies": {
     "@babel/cli": "^7.0.0-beta.39",
@@ -32,6 +32,7 @@
     "sass-loader": "^6.0.6",
     "source-map-support": "^0.5.3",
     "style-loader": "^0.20.1",
+    "uglifyjs-webpack-plugin": "^1.2.2",
     "webpack": "^3.10.0",
     "webpack-dev-server": "^2.11.1",
     "webpack-node-externals": "^1.6.0",
@@ -39,6 +40,7 @@
   },
   "dependencies": {
     "koa": "^2.5.0",
+    "koa-compress": "^2.0.0",
     "koa-static": "^4.0.2",
     "lodash": "^4.17.5",
     "terio": "file:../terio"
