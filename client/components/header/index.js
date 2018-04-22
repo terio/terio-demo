@@ -12,6 +12,7 @@ export default class Header extends terio.Component {
         };
     }
     mounted() {
+        console.log('in1')
         this.interval = setInterval(() => {
             const counter = this.state.counter + 1;
             this.setState({
@@ -21,6 +22,7 @@ export default class Header extends terio.Component {
         }, 1000);
     }
     willUnmount() {
+        console.log('in2')
         clearInterval(this.interval);
     }
     handleClick(){}

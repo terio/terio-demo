@@ -6,7 +6,7 @@
   "author": "subramanyam963@gmail.com",
   "license": "MIT",
   "scripts": {
-    "watch:terio": "nodemon --watch ../terio --exec 'yarn upgrade terio --prefer-offline'",
+    "watch:terio": "nodemon --watch ../terio --ignore lib/ --exec 'yarn upgrade terio'",
     "start:dev:server": "webpack-dev-server --config webpack/dev/webpack.config.client.babel.js",
     "start:prod:server": "yarn build:prod:client && yarn build:prod:server && node --inspect build/server/main",
     "build:prod:server": "rm -rf build/server && webpack --config webpack/prod/webpack.config.server.babel.js",
@@ -43,6 +43,6 @@
     "koa-compress": "^2.0.0",
     "koa-static": "^4.0.2",
     "lodash": "^4.17.5",
-    "terio": "file:../terio"
+    "terio": "https://github.com/terio/terio"
   }
 }

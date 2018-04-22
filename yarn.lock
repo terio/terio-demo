@@ -6077,8 +6077,9 @@ tar@^2.0.0, tar@^2.2.1:
     fstream "^1.0.2"
     inherits "2"
 
-"terio@file:../terio":
+"terio@https://github.com/terio/terio":
   version "0.1.0"
+  resolved "https://github.com/terio/terio#27bd43b750e93c098bd57d73a464b93b03f991f5"
 
 term-size@^1.2.0:
   version "1.2.0"
