@@ -67,6 +67,13 @@
     "@babel/helper-explode-assignable-expression" "7.0.0-beta.39"
     "@babel/types" "7.0.0-beta.39"
 
+"@babel/helper-builder-react-jsx@7.0.0-beta.46":
+  version "7.0.0-beta.46"
+  resolved "https://registry.yarnpkg.com/@babel/helper-builder-react-jsx/-/helper-builder-react-jsx-7.0.0-beta.46.tgz#d399c1892f48bbe68ce6ccca14b127b00cbc656f"
+  dependencies:
+    "@babel/types" "7.0.0-beta.46"
+    esutils "^2.0.0"
+
 "@babel/helper-call-delegate@7.0.0-beta.39":
   version "7.0.0-beta.39"
   resolved "https://registry.yarnpkg.com/@babel/helper-call-delegate/-/helper-call-delegate-7.0.0-beta.39.tgz#7851645811a4bc3eb7cf5f1c72b1c754d0a5e45d"
@@ -132,6 +139,10 @@
   resolved "https://registry.yarnpkg.com/@babel/helper-optimise-call-expression/-/helper-optimise-call-expression-7.0.0-beta.39.tgz#2f2c76665fb9128feb0b84a162b3dcaecc53a102"
   dependencies:
     "@babel/types" "7.0.0-beta.39"
+
+"@babel/helper-plugin-utils@7.0.0-beta.46":
+  version "7.0.0-beta.46"
+  resolved "https://registry.yarnpkg.com/@babel/helper-plugin-utils/-/helper-plugin-utils-7.0.0-beta.46.tgz#f630adbd9d645d0ba2e43f4955b4ad61f44ccdf4"
 
 "@babel/helper-regex@7.0.0-beta.39":
   version "7.0.0-beta.39"
@@ -224,6 +235,12 @@
 "@babel/plugin-syntax-async-generators@7.0.0-beta.39":
   version "7.0.0-beta.39"
   resolved "https://registry.yarnpkg.com/@babel/plugin-syntax-async-generators/-/plugin-syntax-async-generators-7.0.0-beta.39.tgz#ace93b8bb53e256a330b21d78304843fd6d72ab4"
+
+"@babel/plugin-syntax-jsx@7.0.0-beta.46", "@babel/plugin-syntax-jsx@^7.0.0-beta.46":
+  version "7.0.0-beta.46"
+  resolved "https://registry.yarnpkg.com/@babel/plugin-syntax-jsx/-/plugin-syntax-jsx-7.0.0-beta.46.tgz#ed2e8a43716e7904ae33dca71d5f2b436f0f25e8"
+  dependencies:
+    "@babel/helper-plugin-utils" "7.0.0-beta.46"
 
 "@babel/plugin-syntax-object-rest-spread@7.0.0-beta.39":
   version "7.0.0-beta.39"
@@ -345,6 +362,14 @@
   dependencies:
     "@babel/helper-call-delegate" "7.0.0-beta.39"
     "@babel/helper-get-function-arity" "7.0.0-beta.39"
+
+"@babel/plugin-transform-react-jsx@^7.0.0-beta.46":
+  version "7.0.0-beta.46"
+  resolved "https://registry.yarnpkg.com/@babel/plugin-transform-react-jsx/-/plugin-transform-react-jsx-7.0.0-beta.46.tgz#9aa0c491ced30a0d1a8414da2d45462c66912d1e"
+  dependencies:
+    "@babel/helper-builder-react-jsx" "7.0.0-beta.46"
+    "@babel/helper-plugin-utils" "7.0.0-beta.46"
+    "@babel/plugin-syntax-jsx" "7.0.0-beta.46"
 
 "@babel/plugin-transform-regenerator@7.0.0-beta.39":
   version "7.0.0-beta.39"
@@ -470,6 +495,14 @@
 "@babel/types@7.0.0-beta.39":
   version "7.0.0-beta.39"
   resolved "https://registry.yarnpkg.com/@babel/types/-/types-7.0.0-beta.39.tgz#2ea0d97efe4781688751edc68cde640d6559938c"
+  dependencies:
+    esutils "^2.0.2"
+    lodash "^4.2.0"
+    to-fast-properties "^2.0.0"
+
+"@babel/types@7.0.0-beta.46":
+  version "7.0.0-beta.46"
+  resolved "https://registry.yarnpkg.com/@babel/types/-/types-7.0.0-beta.46.tgz#eb84399a699af9fcb244440cce78e1acbeb40e0c"
   dependencies:
     esutils "^2.0.2"
     lodash "^4.2.0"
@@ -783,8 +816,12 @@ babel-loader@8.0.0-beta.0:
     loader-utils "^1.0.2"
     mkdirp "^0.5.1"
 
-"babel-preset-terio@file:../babel-preset-terio":
+"babel-preset-terio@https://github.com/terio/babel-preset-terio":
   version "0.1.0"
+  resolved "https://github.com/terio/babel-preset-terio#5f818409bd925fd5cc357e863d2a5006167284db"
+  dependencies:
+    "@babel/plugin-syntax-jsx" "^7.0.0-beta.46"
+    "@babel/plugin-transform-react-jsx" "^7.0.0-beta.46"
 
 babel-runtime@^6.25.0:
   version "6.26.0"
@@ -2073,8 +2110,9 @@ escope@^3.6.0:
     esrecurse "^4.1.0"
     estraverse "^4.1.1"
 
-"eslint-config-terio@file:../eslint-config-terio":
+"eslint-config-terio@https://github.com/terio/eslint-config-terio":
   version "0.1.0"
+  resolved "https://github.com/terio/eslint-config-terio#37916e0f47775f985ecda99ae296360316ecc900"
 
 eslint-plugin-react@^7.6.1:
   version "7.6.1"
@@ -2170,7 +2208,7 @@ estraverse@^4.0.0, estraverse@^4.1.0, estraverse@^4.1.1:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/estraverse/-/estraverse-4.2.0.tgz#0dee3fed31fcd469618ce7342099fc1afa0bdb13"
 
-esutils@^2.0.2:
+esutils@^2.0.0, esutils@^2.0.2:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/esutils/-/esutils-2.0.2.tgz#0abf4f1caa5bcb1f7a9d8acc6dea4faaa04bac9b"
 
