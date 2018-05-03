@@ -25,8 +25,8 @@ export default class App extends terio.Component {
     willUnmount() {
         clearInterval(this.interval);
     }
-    handleClick() {
-        console.log('yo', this);
+    handleChange() {
+        console.log(this.input.value);
     }
     render() {
         // {this.state.showSomething ? '' : (<terio.Fragment>
@@ -35,10 +35,11 @@ export default class App extends terio.Component {
         //     </terio.Fragment>)}
         return (
             <div>
-                {this.state.showSomething ? <span>something</span> : ''}
-                <Header onclick={this.handleClick.bind(this)}>
+                <Header>
                     Header is shown
                 </Header>
+                {this.state.showSomething ? <span>something</span> : ''}
+                <input type="text" ref={(el) => {this.input = el;}} onkeydown={this.handleChange.bind(this)}/>
                 {this.state.ar.map(el => <p id={el}>{el}</p>)}
             </div>
         );
